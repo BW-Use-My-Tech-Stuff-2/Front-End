@@ -8,8 +8,8 @@ import axios from 'axios';
 const FormContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-content: center;
+  ${'' /* justify-content: center;
+  align-content: center; */}
   height: 800px;
   width: 400px;
   margin: auto;
@@ -66,6 +66,7 @@ const formSchema = yup.object().shape({
 const Register= () => {
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [formState, setFormState] = useState({
+        id:'',
         username: '',
         email: '',
         password: '',
@@ -73,6 +74,7 @@ const Register= () => {
     });
 
     const [errors, setErrors] = useState ({
+        id:'',
         username: '',
         email: '',
         password: '',
@@ -112,8 +114,8 @@ const Register= () => {
         axios
           .post("https://my-tech-stuff.herokuapp.com/api/auth/register ", formState)
           .then(res => {
-            setPost(); // get just the form data from the REST api
-            console.log("success", post);
+            setPost(post); // get just the form data from the REST api
+            console.log("success", res);
             // reset form if successful
             setFormState({
               username: "",

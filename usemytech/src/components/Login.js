@@ -6,9 +6,9 @@ import styled from 'styled-components';
 
 const FormContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
+  ${'' /* flex-direction: column;
+  justify-content: center; */}
+  ${'' /* align-content: center; */}
   height: 800px;
   width: 400px;
   margin: auto;
@@ -21,8 +21,8 @@ const FormContainer = styled.div`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-content: center;
+  ${'' /* justify-content: center;
+  align-content: center; */}
   input {
     width: 380px;
     height: 50px;
