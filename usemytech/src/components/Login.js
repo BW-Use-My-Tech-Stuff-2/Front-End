@@ -1,6 +1,50 @@
 import React, {useState } from 'react';
 import * as Yup from "yup";
 import axios from 'axios';
+import styled from 'styled-components';
+ 
+
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  height: 800px;
+  width: 400px;
+  margin: auto;
+  
+  p {
+    text-align: center;
+  }
+`
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  input {
+    width: 380px;
+    height: 50px;
+    margin: 10px 0;
+    padding: 0 10px;
+    box-sizing: border-box;
+    font-size: 18px;
+    outline: none;
+    background-color: rgb(232, 240, 254)
+  }
+  button {
+    height: 50px;
+    width: 380px;
+    margin: 10px 0 10px 10px;
+    outline: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+    background-color: blueviolet;
+    cursor: pointer;
+  }
+`
 // YUP FORM VALIDATION SCHEMA
     const formSchema = Yup.object().shape({
         username: Yup
@@ -12,7 +56,7 @@ import axios from 'axios';
             .required("A Password is required."),
     })
 
-   const Login2 = () => {
+   const Login = () => {
         // CREATE STATE FOR THE FORM VALUES 
    const [formState, setFormState]=useState({
        username: "",
@@ -73,28 +117,25 @@ import axios from 'axios';
   };
 
 // BASIC SUBMIT EVENTHANDLER/CONSOLE LOG TO CONFIRM FORM SUBMIITTED
-    const formSubmit = e => {
-        e.preventDefault();
-        axios
-        .post("https://my-tech-stuff.herokuapp.com/api/auth/login ", formState)
-        .then(res => {
-          console.log('logged in');
-        }, )}
-      
-        
-         
+const formSubmit = (e) => {
+  e.preventDefault();
+  axios
+    .post('https://my-tech-stuff.herokuapp.com/api/auth/login ', formState)
+    .then((res) => {
+      localStorage.setItem('token', res.data.token);
+      console.log('logged in', res);
+    });
+};
 
- 
 
 //DEFINE FORM ELEMENTS: EMAIL PASSWORD AND TOS 
 
-
-
-
         return (
-            <form onSubmit={formSubmit}>
+          <FormContainer>
+            
+            <Form onSubmit={formSubmit}>
                 <label htmlFor="username">
-                    Username::  
+                    Username  
                     <input 
                         id="username" 
                         type="username" 
@@ -103,9 +144,9 @@ import axios from 'axios';
                         onChange={inputChange}
                         /> {errors.username.length > 0 ? (<p className="error">{errors.username}</p>) : null}
                 </label>
-                  <br /> 
+               
                 <label htmlFor="password ">
-                   Password:::
+                   Password
                     <input 
                         id="password" 
                         type="password" 
@@ -114,10 +155,11 @@ import axios from 'axios';
                         onChange={inputChange} 
                         />{errors.password.length > 6 ? (<p className="error">{errors.password}</p>) : null}
                 </label>
-                <br /> 
-                <button>Submit!</button>
-            </form>
-        )
-        }
+             <button>Login</button>
+             
+            </Form> 
+            </FormContainer>
+        ) 
+       }
 
-        export default Login2;
+        export default Login;

@@ -2,9 +2,50 @@ import React, { useState, useEffect } from 'react';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
  
 import * as yup from "yup";
- 
+import styled from 'styled-components';
 import axios from 'axios';
 
+const FormContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  height: 800px;
+  width: 400px;
+  margin: auto;
+  
+  p {
+    text-align: center;
+  }
+`
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  input {
+    width: 400px;
+    height: 50px;
+    margin: 10px 0;
+    padding: 0 10px;
+    box-sizing: border-box;
+    font-size: 18px;
+    outline: none;
+    background-color: rgb(232, 240, 254)
+  }
+  button {
+    height: 50px;
+    width: 380px;
+    margin: 10px 0 10px 10px;
+    outline: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: white;
+    background-color: blueviolet;
+    cursor: pointer;
+  }
+`
 
 const formSchema = yup.object().shape({
     username: yup
@@ -22,20 +63,20 @@ const formSchema = yup.object().shape({
 })
  
 
-const RegisterForm = () => {
+const Register= () => {
     const [buttonDisabled, setButtonDisabled] = useState(true);
     const [formState, setFormState] = useState({
         username: '',
         email: '',
-        passowrd: '',
-        terms: '',
+        password: '',
+        // terms: '',
     });
 
     const [errors, setErrors] = useState ({
         username: '',
         email: '',
-        passowrd: '',
-        terms: ''
+        password: '',
+        // terms: ''
     });
 
      // new state to set our post request too. So we can console.log and see it.
@@ -78,7 +119,7 @@ const RegisterForm = () => {
               username: "",
               email: "",
               password: "",
-              terms: "" 
+              // terms: "" 
             })
         })}
         //   .catch(err => console.log(err.response));
@@ -100,31 +141,30 @@ const RegisterForm = () => {
   const toggle = () => setModal(!modal);
 
   return (
-    <div>
-      <Button color="primary" onClick={toggle} >REGISTER</Button>
-      <Modal isOpen={modal} toggle={toggle} >
+    <FormContainer>
+       <Button color="primary" onClick={toggle} >REGISTER</Button>
+        <Modal className="regform" isOpen={modal} toggle={toggle} >
         <ModalHeader toggle={toggle}>MEMBER REGISTRATION</ModalHeader>
         <ModalBody>
-        <div className="login-form-container">
+        
           
-        <form  onSubmit={formSubmit} className="regForm">
+        <Form  onSubmit={formSubmit} className="regForm">
             <label htmlFor="username">UserName:<input type="text" name="username" value={formState.username} onChange={inputChange} /></label>
             <label htmlFor="email">Email Address:<input type="email" name="email" value={formState.email} onChange={inputChange} /></label>
             <label htmlFor="password">Password:<input type="password" name="password" value={formState.passoword} onChange={inputChange} /></label>
-            <label htmlFor='terms' className='terms'>
-        <input type='checkbox' name='terms' checked={formState.terms} onChange={inputChange}
-        />Terms & Conditions </label>
+            {/* <label htmlFor='terms' className='terms'> */}
+        {/* <input type='checkbox' name='terms' checked={formState.terms} onChange={inputChange} */}
+        {/* />Terms & Conditions </label> */}
             <Button type="submit" color="primary" onClick={toggle} disabled={buttonDisabled}>REGISTER</Button>
-            </form>
-         </div>        
+            </Form>
+             
          </ModalBody>
         <ModalFooter>
          
           <Button color="primary" onClick={toggle}>Cancel</Button>
         </ModalFooter>
       </Modal>
-     
-    </div>
+    </FormContainer>
  );
-  }
-export default RegisterForm
+}
+export default Register 
