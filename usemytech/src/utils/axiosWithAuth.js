@@ -1,0 +1,16 @@
+import axios from 'axios';
+
+// module that creates a new instance of the axios object
+// baseURL
+// headers object -> authorization header with the token
+
+export const axiosWithAuth = () => {
+  const token = localStorage.getItem('token');
+
+  return axios.create({
+    baseURL: 'https://my-tech-stuff.herokuapp.com/api',
+    headers: {
+      Authorization: token,
+    },
+  });
+};
