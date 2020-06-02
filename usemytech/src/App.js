@@ -27,18 +27,10 @@ function App() {
         </ul>
       </div>
       <Switch>
-        <Route exact path='/' component={Home}>
-          <Home />
-        </Route>
-        <Route path='/Login' component={Login}>
-          <Login />
-        </Route>
-        <Route path='/Register' component={Register}>
-          <Register />
-        </Route>
-        <PrivateRoute path='/Profile' component={Profile}>
-          <Profile />
-        </PrivateRoute>
+        <Route exact path='/Home' component={Home}></Route>
+        <Route path='/Login' component={Login}></Route>
+        <Route path='/Register' component={Register}></Route>
+        <PrivateRoute path='/Profile' component={Profile}></PrivateRoute>
       </Switch>
     </Router>
   );

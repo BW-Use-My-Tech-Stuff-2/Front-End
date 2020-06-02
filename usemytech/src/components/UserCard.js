@@ -16,9 +16,8 @@ export default function UserCard(props) {
   };
 
   return (
-    <div style={styleObj} id={props.key}>
+    <div style={styleObj} id={props.id}>
       <h1>{props.name}</h1>
-      <h1>{props.name.items}</h1>
     </div>
   );
 }

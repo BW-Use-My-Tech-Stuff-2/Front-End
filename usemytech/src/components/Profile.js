@@ -1,5 +1,4 @@
 import React from 'react';
-import axios from 'axios';
 import styled from 'styled-components';
 import Users from './Users';
 
@@ -15,15 +14,6 @@ const Container = styled.div`
     text-align: center;
   }
 `;
-
-axios
-  .get('http://localhost:5000/api/items')
-  .then((res) => {
-    console.log(res);
-  })
-  .catch(function (error) {
-    console.log('cannot get data');
-  });
 
 function Profile(props) {
   return (

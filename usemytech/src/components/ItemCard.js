@@ -11,7 +11,7 @@ export default function ItemCard(props) {
     margin: '10px',
     border: '2px solid grey',
     width: '350px',
-    height: '350px',
+    height: 'px',
     boxShadow: '3px 3px 5px 6px #ccc',
   };
 
